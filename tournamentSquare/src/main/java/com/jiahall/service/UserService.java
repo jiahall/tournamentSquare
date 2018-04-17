@@ -1,10 +1,12 @@
 package com.jiahall.service;
 
+import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jiahall.dao.UserDAO;
+import com.jiahall.jsonBuilder.JsonReply;
 import com.jiahall.model.User;
 
 import java.util.List;
@@ -41,5 +43,19 @@ public class UserService {
 	 public void deleteUser(String id) {
 	  userDao.deleteUser(id);
 	 }
+	 
+	 @Transactional
+	 public int registerCheck(String email, String userName, String passWord) {
+		
+		int result = userDao.insertUser(email, userName, passWord);
+		return result;
 	}
+	 @Transactional
+	public int loginCheck(String email, String passWord) {
+		int result = userDao.checkUser(email,  passWord);
+		return result;
+	}
+
+}
+	
 	 

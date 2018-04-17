@@ -1,3 +1,4 @@
+com\jiahall\jsonBuilder\JsonReply.class
 com\jiahall\dao\UserDAO.class
 com\jiahall\model\User.class
 com\jiahall\controller\UserController.class
