@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Repository;
 
 import com.jiahall.model.User;
@@ -61,9 +62,13 @@ public class UserDAO {
 		int response = 4;
 		Session session = this.sessionFactory.getCurrentSession();
 		List userlist = session
-				.createQuery("from User where email = '" + email + "' and passWord = '" + passWord + "' ").list();
+				.createQuery("from User where email = '" + email + "'").list();
 
 		if (userlist.size() == 1) {
+			if (BCrypt.checkpw(passWord, ((User) userlist.get(0)).getPassWord()))
+			    System.out.println("It matches");
+			else
+			    System.out.println("It does not match");
 			response = 1;
 		} else {
 			response = 2;

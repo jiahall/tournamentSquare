@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -73,7 +74,8 @@ public class UserController {
 		int resNum = 4;
 		if (email.length() >= 4 && userName.length() >= 4 && passWord.length() >= 4) {
 			try {
-				resNum = userService.registerCheck(email, userName, passWord);
+				String pw_hash = BCrypt.hashpw(passWord, BCrypt.gensalt()); 
+				resNum = userService.registerCheck(email, userName, pw_hash);
 
 			} catch (DataIntegrityViolationException e) {
 
@@ -106,6 +108,7 @@ public class UserController {
 		String response = "";
 		int resNum = 4;
 		if (email.length() >= 4 && passWord.length() >= 4) {
+			
 			try {
 				resNum = userService.loginCheck(email, passWord);
 			} catch (IndexOutOfBoundsException e) {
