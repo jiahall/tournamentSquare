@@ -22,7 +22,7 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
-	// works
+	// works fart
 	@RequestMapping(value = "/getAllUsers", method = RequestMethod.GET, headers = "Accept=application/json")
 	public List getUsers() {
 
