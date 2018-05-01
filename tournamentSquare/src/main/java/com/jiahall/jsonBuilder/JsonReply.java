@@ -5,19 +5,22 @@ import com.google.gson.Gson;
 
 public class JsonReply {
 	
+	
 	   public String action;
 	   public boolean success;
 	   public String err;
+	   public String uname;
+	   
 	   public JsonReply(String message, boolean success, String err)
 	   {
 	      this.action = message;
 	      this.success = success;
 	      this.err = err;
 	   }
-	   public JsonReply(String message, boolean success)
+	   public JsonReply(String uname)
 	   {
-	      this.action = message;
-	      this.success = success;
+	      this.uname = uname;
+	      
 	      
 	   }
 	   
@@ -28,12 +31,7 @@ public class JsonReply {
 		return count;
 		}
 	   
-	   public static String reply(String message, boolean success) {
-			 JsonReply obj = new JsonReply(message, success);  
-			 Gson gson = new Gson();
-			 String json = gson.toJson(obj);
-		   return json;
-	   }
+
 	   
 	   public static String reply(String message, boolean success, String error) {
 			 JsonReply obj = new JsonReply(message, success, error);  
@@ -41,6 +39,14 @@ public class JsonReply {
 			 String json = gson.toJson(obj);
 		   return json;
 	   }
+	   public static String reply(String uname) {
+			 JsonReply obj = new JsonReply(uname); 
+			 System.out.println(obj);
+			 Gson gson = new Gson();
+			 String json = gson.toJson(obj);
+		   return json;
+	   }
+	   
 	   
 
 	}

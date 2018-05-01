@@ -1,5 +1,4 @@
 package com.jiahall.dao;
-
 import java.util.List;
 
 import org.hibernate.Session;
@@ -75,6 +74,15 @@ public class UserDAO {
 		}
 
 		System.out.println(userlist.get(0).toString());
+		return response;
+	}
+
+	public String checkUser(String email) {
+		Session session = this.sessionFactory.getCurrentSession();
+		List userlist = session
+				.createQuery("from User where email = '" + email + "'").list();
+		String response =((User) userlist.get(0)).getUserName();
+		
 		return response;
 	}
 

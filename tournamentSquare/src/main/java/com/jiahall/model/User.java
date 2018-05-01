@@ -39,6 +39,7 @@ public class User{
 		this.verified = verified;
 		this.passWord = passWord;
 	}
+	
 
 	public String getUserName() {
 		return userName;

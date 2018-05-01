@@ -56,6 +56,14 @@ public class UserService {
 		return result;
 	}
 
+	 @Transactional
+	public String getusername(String email) {
+		String username = userDao.checkUser(email);
+		return username;
+	}
+
+
+
 }
 	
 	 

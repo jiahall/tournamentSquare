@@ -42,7 +42,7 @@ public class UserController {
 		try {
 			userService.addUser(user);
 
-			response = JsonReply.reply("entered?", true);
+			response = JsonReply.reply("entered?");
 
 		} catch (DataIntegrityViolationException e) {
 			JsonReply obj = new JsonReply("entered?", false, "Already there");
@@ -67,7 +67,7 @@ public class UserController {
 		userService.deleteUser(id);
 	}
 
-	@RequestMapping(value = "/registerUser/{email}/{userName}/{passWord}", method = RequestMethod.GET, headers = "Accept=application/json", produces = "application/json")
+	@RequestMapping(value = "/registerUser/{email}/{userName}/{passWord}", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
 	public String registerUser(@PathVariable("email") String email, @PathVariable("userName") String userName,
 			@PathVariable("passWord") String passWord) {
 		String response = "";
@@ -100,6 +100,15 @@ public class UserController {
 			break;
 		}
 		return response;
+	}
+	
+	@RequestMapping(value = "/getusername/{email}", method = RequestMethod.GET, headers = "Accept=application/json", produces = "application/json")
+	public String getusername(@PathVariable("email") String email) {
+
+		String response = JsonReply.reply(userService.getusername(email));
+		System.out.println(response);
+		return response;
+
 	}
 
 	@RequestMapping(value = "/login/{email}/{passWord}", method = RequestMethod.GET, headers = "Accept=application/json", produces = "application/json")
