@@ -50,28 +50,34 @@ public class UserDAO {
 		}
 	}
 
-	public int insertUser(String email, String userName, String passWord) {
+	public int insertUser(String email, String userName, String password) {
 		Session session = this.sessionFactory.getCurrentSession();
-		User bort = new User(userName, email, "no", passWord);
+		User bort = new User(userName, email, "no", password);
 		session.persist(bort);
 		return 1;
 	}
 
-	public int checkUser(String email, String passWord) {
+	public int checkUser(String email, String password) {
 		int response = 4;
 		Session session = this.sessionFactory.getCurrentSession();
+		String hql ="from User where email = :email";
 		List userlist = session
-				.createQuery("from User where email = '" + email + "'").list();
+				.createQuery(hql).setParameter("email",email)
+				.list();
 
 		if (userlist.size() == 1) {
-			if (BCrypt.checkpw(passWord, ((User) userlist.get(0)).getPassWord()))
+			if (BCrypt.checkpw(password, ((User) userlist.get(0)).getPassWord())) {
 			    System.out.println("It matches");
-			else
-			    System.out.println("It does not match");
 			response = 1;
-		} else {
+				}else {
+			    System.out.println("It does not match");
 			response = 2;
+			
+		}} else {
+			response = 2;
+			
 		}
+		
 
 		System.out.println(userlist.get(0).toString());
 		return response;

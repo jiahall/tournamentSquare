@@ -1,9 +1,13 @@
+com\jiahall\service\EntrantService.class
+com\jiahall\controller\EntrantController.class
+com\jiahall\dao\EntrantDAO.class
+com\jiahall\model\User.class
+com\jiahall\service\TournamentService.class
 com\jiahall\controller\TournamentController.class
 com\jiahall\jsonBuilder\JsonReply.class
+com\jiahall\model\Entrant.class
 com\jiahall\service\UserService.class
 com\jiahall\dao\TournamentDAO.class
 com\jiahall\dao\UserDAO.class
-com\jiahall\model\User.class
 com\jiahall\controller\UserController.class
-com\jiahall\service\TournamentService.class
 com\jiahall\model\Tournament.class

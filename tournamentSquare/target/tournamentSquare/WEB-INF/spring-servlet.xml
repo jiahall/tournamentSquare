@@ -18,13 +18,9 @@
 			value="jdbc:mysql://mysql.student.sussex.ac.uk/jh555?allowMultiQueries=true" />
 		<beans:property name="username" value="jh555" />
 		<beans:property name="password" value="boulder1" />
-		
-		<beans:property name="hibernate.c3p0.min_size" value="5" />
- 		<beans:property name="hibernate.c3p0.max_size" value="100"/>
-  		<beans:property name="hibernate.c3p0.timeout" value="200" />
-  		<beans:property name="hibernate.c3p0.max_statements" value="50"/>
-  		<beans:property name="hibernate.c3p0.idle_test_period" value="3000"/>
-		
+
+  		
+  		
 	</beans:bean>
 
 	<!-- Hibernate 4 SessionFactory Bean definition -->
@@ -45,6 +41,13 @@
 				<beans:prop key="hibernate.jdbc.batch_size">10</beans:prop>
 				<beans:prop key="hibernate.order_inserts">true</beans:prop>
                 <beans:prop key="hibernate.order_updates">true</beans:prop>
+                
+  				<beans:prop key="hibernate.c3p0.min_size">5</beans:prop>
+  				<beans:prop key="hibernate.c3p0.max_size">20</beans:prop>
+  				<beans:prop key="hibernate.c3p0.timeout">300</beans:prop>
+ 				<beans:prop key="hibernate.c3p0.max_statements">50</beans:prop>
+  				<beans:prop key="hibernate.c3p0.idle_test_period">3000</beans:prop>
+                
 			</beans:props>
 
 			

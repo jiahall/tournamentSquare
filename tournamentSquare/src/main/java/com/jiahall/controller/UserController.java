@@ -67,14 +67,14 @@ public class UserController {
 		userService.deleteUser(id);
 	}
 
-	@RequestMapping(value = "/registerUser/{email}/{userName}/{passWord}", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
+	@RequestMapping(value = "/registerUser/{email}/{userName}/{password}", method = RequestMethod.PUT, headers = "Accept=application/json", produces = "application/json")
 	public String registerUser(@PathVariable("email") String email, @PathVariable("userName") String userName,
-			@PathVariable("passWord") String passWord) {
+			@PathVariable("password") String password) {
 		String response = "";
 		int resNum = 4;
-		if (email.length() >= 4 && userName.length() >= 4 && passWord.length() >= 4) {
+		if (email.length() >= 4 && userName.length() >= 4 && password.length() >= 4) {
 			try {
-				String pw_hash = BCrypt.hashpw(passWord, BCrypt.gensalt()); 
+				String pw_hash = BCrypt.hashpw(password, BCrypt.gensalt()); 
 				resNum = userService.registerCheck(email, userName, pw_hash);
 
 			} catch (DataIntegrityViolationException e) {
@@ -111,15 +111,15 @@ public class UserController {
 
 	}
 
-	@RequestMapping(value = "/login/{email}/{passWord}", method = RequestMethod.GET, headers = "Accept=application/json", produces = "application/json")
-	public String login(@PathVariable("email") String email, @PathVariable("passWord") String passWord) {
+	@RequestMapping(value = "/login/{email}/{password}", method = RequestMethod.GET, headers = "Accept=application/json", produces = "application/json")
+	public String login(@PathVariable("email") String email, @PathVariable("password") String password) {
 
 		String response = "";
 		int resNum = 4;
-		if (email.length() >= 4 && passWord.length() >= 4) {
+		if (email.length() >= 4 && password.length() >= 4) {
 			
 			try {
-				resNum = userService.loginCheck(email, passWord);
+				resNum = userService.loginCheck(email, password);
 			} catch (IndexOutOfBoundsException e) {
 				resNum = 2;
 				System.out.println("booty cheeks");

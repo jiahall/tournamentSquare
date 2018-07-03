@@ -35,6 +35,7 @@ public class Tournament {
 	
 	@Version
 	@Column(name="currEntrants")
+	public
 	int currEntrants; 
 	
 	@Column(name="host")

@@ -45,14 +45,14 @@ public class UserService {
 	 }
 	 
 	 @Transactional
-	 public int registerCheck(String email, String userName, String passWord) {
+	 public int registerCheck(String email, String userName, String password) {
 		
-		int result = userDao.insertUser(email, userName, passWord);
+		int result = userDao.insertUser(email, userName, password);
 		return result;
 	}
 	 @Transactional
-	public int loginCheck(String email, String passWord) {
-		int result = userDao.checkUser(email,  passWord);
+	public int loginCheck(String email, String password) {
+		int result = userDao.checkUser(email,  password);
 		return result;
 	}
 

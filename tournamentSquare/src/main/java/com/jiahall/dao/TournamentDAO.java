@@ -64,13 +64,33 @@ public class TournamentDAO {
 		Tournament p = (Tournament) session.load(Tournament.class, new String(name));
 		
 		if (tournament.getCurrEntrants() !=p.getCurrEntrants()) {
-			throw new StaleStateException("e");
-			
-			
+			return 2;
 		}
-		
-		session.persist(tournament);
+		session.merge(tournament);
 		return 1;
+	}
+
+	public int joinTournament(String tournament) {
+		Session session = this.sessionFactory.getCurrentSession();
+		String name = tournament;
+		// get old curr users
+		Tournament p = (Tournament) session.load(Tournament.class, new String(name));
+
+		
+		if (p.getCurrEntrants() >= ((Tournament) session.load(Tournament.class, new String(name))).getMaxEntrants()) {
+			
+			System.out.println((p.getCurrEntrants()));
+			p.setEnterAble("N");
+			return 3;
+			
+			
+		}else {
+			System.out.println("he's in");
+			p.setCurrEntrants(p.currEntrants= p.currEntrants +1);
+		
+		session.persist(p);
+		return 1;
+	}
 	}
 	
 	
@@ -97,21 +117,21 @@ public class TournamentDAO {
 		}
 	}
 
-	public int insertUser(String email, String userName, String passWord) {
+	public int insertUser(String email, String userName, String password) {
 		Session session = this.sessionFactory.getCurrentSession();
-		User bort = new User(userName, email, "no", passWord);
+		User bort = new User(userName, email, "no", password);
 		session.persist(bort);
 		return 1;
 	}
 
-	public int checkUser(String email, String passWord) {
+	public int checkUser(String email, String password) {
 		int response = 4;
 		Session session = this.sessionFactory.getCurrentSession();
 		List userlist = session
 				.createQuery("from User where email = '" + email + "'").list();
 
 		if (userlist.size() == 1) {
-			if (BCrypt.checkpw(passWord, ((User) userlist.get(0)).getPassWord()))
+			if (BCrypt.checkpw(password, ((User) userlist.get(0)).getPassWord()))
 			    System.out.println("It matches");
 			else
 			    System.out.println("It does not match");

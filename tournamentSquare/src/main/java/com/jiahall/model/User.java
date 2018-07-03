@@ -24,20 +24,20 @@ public class User{
 	@Column(name="verified")
 	String verified;
 
-	@Column(name="passWord")
-	String passWord;
+	@Column(name="password")
+	String password;
 
 	public User() {
 		super();
 	}
 
 
-	public User(String userName, String email, String verified, String passWord) {
+	public User(String userName, String email, String verified, String password) {
 		super();
 		this.userName = userName;
 		this.email = email;
 		this.verified = verified;
-		this.passWord = passWord;
+		this.password = password;
 	}
 	
 
@@ -60,10 +60,10 @@ public class User{
 		this.verified = verified;
 	}
 	public String getPassWord() {
-		return passWord;
+		return password;
 	}
-	public void setPassWord(String passWord) {
-		this.passWord = passWord;
+	public void setPassWord(String password) {
+		this.password = password;
 	}
 
 }
